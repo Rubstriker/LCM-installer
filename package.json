@@ -16,6 +16,7 @@
     "moment": "^2.29.4",
     "no-try": "^3.1.0",
     "regedit": "^5.1.2",
+    "registry-js": "^1.15.1",
     "vdf-parser": "^1.2.1"
   },
   "devDependencies": {
@@ -32,8 +33,7 @@
   },
   "pkg": {
     "assets": [
-      "lcm-data/**/*",
-      "node_modules/regedit/**/*"
+      "lcm-data/**/*"
     ],
     "targets": [
       "node16-win-x64"

@@ -3,15 +3,30 @@ import * as path from 'path';
 import { promises as fs } from 'fs';
 import { noTryAsync } from 'no-try';
 import { promisified as reg } from 'regedit';
+import { enumerateValues, HKEY, RegistryValueType } from 'registry-js'
 import chalk from 'chalk';
 
 const STEAM_DEFAULT_PATH = 'C:\\Program Files (x86)\\Steam\\steamapps\\libraryfolders.vdf';
 const STEAM_GAME_PATH = '{library}\\steamapps\\common\\{game}\\';
-const STEAM_KEY = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Valve\\Steam';
+// const STEAM_KEY = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Valve\\Steam';
+const STEAM_KEY = 'SOFTWARE\\Wow6432Node\\Valve\\Steam';
+
+// async function getSteamPath() {
+//     const [error, result] = await noTryAsync(() => reg.list([STEAM_KEY]).then(v => v[STEAM_KEY].values.InstallPath.value));
+//     if (error) return STEAM_DEFAULT_PATH;
+//
+//     console.log(chalk.yellow('Steam path resolved to: '), chalk.green(result));
+//     return result as string;
+// }
 
 async function getSteamPath() {
-    const [error, result] = await noTryAsync(() => reg.list([STEAM_KEY]).then(v => v[STEAM_KEY].values.InstallPath.value));
-    if (error) return STEAM_DEFAULT_PATH;
+    const values = enumerateValues(
+        HKEY.HKEY_LOCAL_MACHINE,
+        STEAM_KEY,
+    );
+
+    const result = values.find((value) => value.name === 'InstallPath')?.data;
+    if (!result) return STEAM_DEFAULT_PATH;
 
     console.log(chalk.yellow('Steam path resolved to: '), chalk.green(result));
     return result as string;
