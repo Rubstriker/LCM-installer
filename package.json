@@ -15,6 +15,7 @@
     "glob": "^10.3.3",
     "moment": "^2.29.4",
     "no-try": "^3.1.0",
+    "registry-js": "^1.15.1",
     "vdf-parser": "^1.2.1"
   },
   "devDependencies": {

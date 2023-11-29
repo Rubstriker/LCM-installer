@@ -27,7 +27,7 @@ async function copyFiles(source: string, dest: string) {
 }
 
 export async function installMods(): Promise<boolean> {
-    console.log(chalk.yellowBright('Installing mods...'));
+    console.log(chalk.yellow('Installing mods...'));
 
     const modsPath = getModsPath();
     const [error, lcPath] = await noTryAsync(() => findGamePath('Lethal Company'));
@@ -51,10 +51,10 @@ export async function installMods(): Promise<boolean> {
         return false;
     }
 
-    console.log(chalk.yellowBright('Installed mods!'));
+    console.log(chalk.yellow('Installed mods!'));
 
     console.log(chalk.blueBright('All done!'));
     console.log(chalk.greenBright('Enjoy playing Lethal Company (modded)!'));
-    console.log(chalk.yellowBright('If you want to uninstall the mods, run this app again.'));
+    console.log(chalk.yellow('If you want to uninstall the mods, run this app again.'));
     return true;
 }
