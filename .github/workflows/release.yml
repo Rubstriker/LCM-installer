@@ -1,0 +1,43 @@
+name: Release Application
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Build & Release app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone codebase
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Get tag name
+        id: tag
+        run: echo ::set-output name=name::`node ./.lcm/scripts/get-release-name.js ${{ github.run_number }}`
+
+      - name: Install project dependencies
+        run: yarn install --prefer-offline
+
+      - name: Package application
+        run: yarn package
+
+      - name: Release asset
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.name }}
+          draft: false
+          prerelease: false
+          files: |
+            ./out/lcm.exe
