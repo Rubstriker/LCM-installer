@@ -56,11 +56,17 @@ async function findGamePathInLibrary(game: string, library: string) {
     return gamePath;
 }
 
+let gamePathCache: { [key: string]: string } = {};
 export async function findGamePath(game: string) {
+    if (gamePathCache[game]) return gamePathCache[game];
+
     const libraries = await findSteamLibraries();
     for (const library of libraries) {
         const gamePath = await findGamePathInLibrary(game, library);
-        if (gamePath) return gamePath;
+        if (!gamePath) continue;
+
+        gamePathCache[game] = gamePath;
+        return gamePath;
     }
 
     return null;
