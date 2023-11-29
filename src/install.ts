@@ -4,7 +4,7 @@ import {promises as fs} from 'fs';
 import {findGamePath} from './steam';
 import {noTryAsync} from 'no-try';
 
-function getModsPath() {
+export function getModsPath() {
     return path.join(__dirname, '../lcm-data');
 }
 
@@ -51,6 +51,10 @@ export async function installMods(): Promise<boolean> {
         return false;
     }
 
-    console.log(chalk.greenBright('Installed mods!'));
+    console.log(chalk.yellowBright('Installed mods!'));
+
+    console.log(chalk.blueBright('All done!'));
+    console.log(chalk.greenBright('Enjoy playing Lethal Company (modded)!'));
+    console.log(chalk.yellowBright('If you want to uninstall the mods, run this app again.'));
     return true;
 }

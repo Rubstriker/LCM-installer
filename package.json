@@ -39,6 +39,7 @@
     "outputPath": "out"
   },
   "bin": {
-    "lcm": "./dist/index.js"
+    "lcm": "./dist/index.js",
+    "lcm-uninstaller": "./dist/rm.js"
   }
 }

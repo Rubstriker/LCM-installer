@@ -1,7 +1,7 @@
 import * as vdf from 'vdf-parser';
 import * as path from 'path';
 import { promises as fs } from 'fs';
-import {noTry, noTryAsync} from 'no-try';
+import {noTryAsync} from 'no-try';
 
 const STEAM_PATH = 'C:\\Program Files (x86)\\Steam\\steamapps\\libraryfolders.vdf';
 const STEAM_GAME_PATH = '{library}\\steamapps\\common\\{game}\\';

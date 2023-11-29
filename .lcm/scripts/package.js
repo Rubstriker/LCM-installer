@@ -37,9 +37,6 @@ async function readDirRecursive(dir) {
 }
 
 async function package() {
-    const dist = JSON.stringify(path.join(root, 'dist', 'index.js'));
-    const out = JSON.stringify(path.join(root, 'out', 'lcm.exe'));
-
     console.log('Compiling TypeScript...');
     await cmd(path.join('typescript', 'bin', 'tsc'));
 
