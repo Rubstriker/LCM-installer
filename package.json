@@ -32,7 +32,8 @@
   },
   "pkg": {
     "assets": [
-      "lcm-data/**/*"
+      "lcm-data/**/*",
+      "node_modules/regedit/**/*"
     ],
     "targets": [
       "node16-win-x64"
