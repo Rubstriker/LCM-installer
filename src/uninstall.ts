@@ -5,7 +5,7 @@ import {findGamePath} from './steam';
 import {noTryAsync} from 'no-try';
 
 export async function uninstallMods(): Promise<boolean> {
-    console.log(chalk.yellowBright('Uninstalling mods...'));
+    console.log(chalk.yellow('Uninstalling mods...'));
 
     const modsPath = path.join(__dirname, '../lcm-data');
     const [error, lcPath] = await noTryAsync(() => findGamePath('Lethal Company'));
@@ -27,10 +27,10 @@ export async function uninstallMods(): Promise<boolean> {
         return false;
     }
 
-    console.log(chalk.yellowBright('Uninstalled mods!'));
+    console.log(chalk.yellow('Uninstalled mods!'));
 
     console.log(chalk.blueBright('All done!'));
     console.log(chalk.greenBright('Enjoy playing Lethal Company (vanilla)!'));
-    console.log(chalk.yellowBright('If you want to reinstall the mods, run this app again.'));
+    console.log(chalk.yellow('If you want to reinstall the mods, run this app again.'));
     return true;
 }
