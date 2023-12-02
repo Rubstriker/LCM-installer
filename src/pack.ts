@@ -131,11 +131,53 @@ export async function runPatch(patch: string, environment: any) {
     }
 }
 
-export async function installModpack(packagePath: string, gamePath: string) {
+export async function getLatestVersion(): Promise<string> {
+    return new Promise((resolve, reject) => {
+        https.get({
+            host: 'api.github.com',
+            path: '/repos/firecraftgaming/LCM-installer/releases/latest',
+            headers: {
+                'User-Agent': 'LCM-installer',
+            }
+        }, res => {
+            let data = '';
+            res.on('data', chunk => data += chunk);
+            res.on('end', () => resolve(JSON.parse(data).tag_name));
+        });
+    });
+}
+
+const PACK_URL = 'https://github.com/firecraftgaming/LCM-installer/releases/download/{version}/pack.zip';
+async function downloadPack(file: string, url?: string) {
+    if (!url) {
+        const version = await getLatestVersion();
+        url = PACK_URL.replace('{version}', version);
+    }
+
+    await new Promise<void>((resolve, reject) => {
+        https.get(url, res => {
+            if (res.statusCode === 301 || res.statusCode === 302) return downloadPack(file, res.headers.location).then(resolve, reject);
+            const packageFile = createWriteStream(file);
+
+            console.log(chalk.blueBright(`Downloading ${url} to ${file}`));
+            res.pipe(packageFile);
+
+            packageFile.on("finish", () => packageFile.close());
+
+            packageFile.on('error', err => reject(err));
+            packageFile.on('close', () => resolve());
+        });
+    });
+}
+
+export async function installModpack(gamePath: string) {
     console.log(chalk.yellow('Installing modpack...'));
 
     const folder = path.join(os.tmpdir(), `../tmp/${Date.now()}`);
     await fs.mkdir(folder, {recursive: true});
+
+    const packagePath = path.join(folder, 'pack.zip');
+    await downloadPack(packagePath);
 
     const unpackPath = path.join(folder, 'pack');
     await unzipPackage(packagePath, unpackPath);

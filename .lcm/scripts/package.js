@@ -13,8 +13,7 @@ function zipDirectory(sourceDir, outPath) {
         archive
             .directory(sourceDir, false)
             .on('error', err => reject(err))
-            .pipe(stream)
-        ;
+            .pipe(stream);
 
         stream.on('close', () => resolve());
         archive.finalize();
@@ -37,39 +36,19 @@ function cmd(command, ...args) {
     });
 }
 
-async function readDirRecursive(dir) {
-    const results = await fs.readdir(dir);
-    const files = [];
-
-    for (const result of results) {
-        if (result.endsWith('.js')) files.push(result);
-        if (result.includes('.')) continue;
-
-        const subFiles = await readDirRecursive(path.join(dir, result));
-        for (const subFile of subFiles) files.push(`${result}/${subFile}`);
-    }
-
-    return files;
-}
-
 async function package() {
     console.log('Compiling TypeScript...');
     await cmd(path.join('typescript', 'bin', 'tsc'));
 
-    console.log('Packaging modpack...');
-    await zipDirectory(path.join(root, 'pack'), path.join(root, 'lcm-data', 'pack.zip'));
-
     console.log('Packaging executable...');
     await cmd(path.join('pkg', 'lib-es5', 'bin.js'), JSON.stringify(path.join(root, 'package.json')));
 
-    await fs.copyFile(path.join(root, 'lcm-data', 'pack.zip'), path.join(root, 'out', 'pack.zip')); // We also want to release the pack.zip file
+    console.log('Packaging modpack...');
+    await zipDirectory(path.join(root, 'pack'), path.join(root, 'out', 'pack.zip'));
 }
 
 async function clean() {
     console.log('Cleaning up...');
-
-    const pack = `${root}/lcm-data/pack.zip`;
-    await fs.rm(pack, { recursive: true });
 
     const dist = `${root}/dist`;
     await fs.rm(dist, { recursive: true });
