@@ -3,12 +3,13 @@ import * as path from 'path';
 import {promises as fs} from 'fs';
 import {findGamePath} from './steam';
 import {noTryAsync} from 'no-try';
+import {installModpack} from "./pack";
 
 export function getModsPath() {
-    return path.join(__dirname, '../lcm-data');
+    return path.join(__dirname, '../lcm-data/BepInEx');
 }
 
-async function copyFiles(source: string, dest: string) {
+export async function copyFiles(source: string, dest: string) {
     const [error, stat] = await noTryAsync(() => fs.lstat(source));
     if (error || !stat) return Promise.resolve();
     if (!stat.isDirectory()) console.log(chalk.blueBright(`Copying ${source} to ${dest}`));
@@ -27,7 +28,7 @@ async function copyFiles(source: string, dest: string) {
 }
 
 export async function installMods(): Promise<boolean> {
-    console.log(chalk.yellow('Installing mods...'));
+    console.log(chalk.yellow('Installing modfiles...'));
 
     const modsPath = getModsPath();
     const [error, lcPath] = await noTryAsync(() => findGamePath('Lethal Company'));
@@ -46,14 +47,17 @@ export async function installMods(): Promise<boolean> {
 
     const [err] = await noTryAsync(() => Promise.all(promises));
     if (err) {
-        console.log(chalk.redBright('Failed to install mods!'));
+        console.log(chalk.redBright('Failed to install modfiles!'));
         console.error(err);
         return false;
     }
 
-    console.log(chalk.yellow('Installed mods!'));
+    console.log(chalk.yellow('Installed modfiles!'));
 
-    console.log(chalk.blueBright('All done!'));
+    const modpack = path.join(__dirname, '../lcm-data/pack.zip')
+    await installModpack(modpack, lcPath);
+
+    console.log(chalk.yellow('All done!'));
     console.log(chalk.greenBright('Enjoy playing Lethal Company (modded)!'));
     console.log(chalk.yellow('If you want to uninstall the mods, run this app again.'));
     return true;

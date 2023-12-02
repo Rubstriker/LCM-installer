@@ -29,7 +29,7 @@ export async function uninstallMods(): Promise<boolean> {
 
     console.log(chalk.yellow('Uninstalled mods!'));
 
-    console.log(chalk.blueBright('All done!'));
+    console.log(chalk.yellow('All done!'));
     console.log(chalk.greenBright('Enjoy playing Lethal Company (vanilla)!'));
     console.log(chalk.yellow('If you want to reinstall the mods, run this app again.'));
     return true;

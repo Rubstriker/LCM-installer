@@ -24,4 +24,12 @@ process.on('SIGINT', () => {
     process.exit(0);
 });
 
-if (require.main === module) main();
+process.on('uncaughtException', (err) => {
+    console.error(err);
+});
+
+process.on('unhandledRejection', (err) => {
+    console.error(err);
+});
+
+if (require.main === module) setTimeout(main, 0);
