@@ -1,0 +1,10 @@
+{
+  "name": "HelmetCameras",
+  "action": "file",
+  "operations": [
+    {
+      "source": "js:patch://patch.js",
+      "destination": "BepInEx/config/RickArg.lethalcompany.helmetcameras.cfg"
+    }
+  ]
+}

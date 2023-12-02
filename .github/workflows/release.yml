@@ -41,3 +41,4 @@ jobs:
           prerelease: false
           files: |
             ./out/lcm.exe
+            ./out/pack.zip
