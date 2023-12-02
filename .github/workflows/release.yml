@@ -41,4 +41,14 @@ jobs:
           prerelease: false
           files: |
             ./out/lcm.exe
+
+      - name: Release asset
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.name }}
+          draft: false
+          prerelease: false
+          files: |
             ./out/pack.zip
