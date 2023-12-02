@@ -58,10 +58,11 @@ async function package() {
 
     console.log('Packaging modpack...');
     await zipDirectory(path.join(root, 'pack'), path.join(root, 'lcm-data', 'pack.zip'));
-    await fs.copyFile(path.join(root, 'lcm-data', 'pack.zip'), path.join(root, 'out', 'pack.zip')); // We also want to release the pack.zip file
 
     console.log('Packaging executable...');
     await cmd(path.join('pkg', 'lib-es5', 'bin.js'), JSON.stringify(path.join(root, 'package.json')));
+
+    await fs.copyFile(path.join(root, 'lcm-data', 'pack.zip'), path.join(root, 'out', 'pack.zip')); // We also want to release the pack.zip file
 }
 
 async function clean() {
