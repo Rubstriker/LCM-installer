@@ -7,7 +7,7 @@ import {noTryAsync} from 'no-try';
 export async function uninstallMods(): Promise<boolean> {
     console.log(chalk.yellow('Uninstalling mods...'));
 
-    const modsPath = path.join(__dirname, '../lcm-data');
+    const modsPath = path.join(__dirname, '../lcm-data/BepInEx');
     const [error, lcPath] = await noTryAsync(() => findGamePath('Lethal Company'));
     if (error || !lcPath) {
         console.log(chalk.redBright('Could not find Lethal Company installation!'));
