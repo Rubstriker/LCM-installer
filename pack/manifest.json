@@ -2,7 +2,6 @@
   "name": "Naco Modpack",
   "description": "A curated modpack by Naco",
   "plugins": [
-    "Rattenbonkers-Boombox_Autonext-1.0.0",
     "Steven-Custom_Boombox_Music-1.4.0",
     "AlexCodesGames-AdditionalSuits-1.0.2",
     "Zduniusz-LBtoKG-1.0.0",
