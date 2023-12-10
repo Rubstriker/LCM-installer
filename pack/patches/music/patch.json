@@ -1,0 +1,10 @@
+{
+  "name": "Boombox Music",
+  "action": "file",
+  "operations": [
+    {
+      "source": "patch://music",
+      "destination": "BepInEx/Custom Songs/Boombox Music"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "AdditionalSuits",
+  "action": "file",
+  "operations": [
+    {
+      "source": "patch://suits",
+      "destination": "BepInEx/plugins/resAdditionalSuits"
+    }
+  ]
+}
