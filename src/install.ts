@@ -3,12 +3,13 @@ import * as path from 'path';
 import {promises as fs} from 'fs';
 import {findGamePath} from './steam';
 import {noTryAsync} from 'no-try';
+import {installModpack} from "./pack";
 
 export function getModsPath() {
-    return path.join(__dirname, '../lcm-data');
+    return path.join(__dirname, '../lcm-data/BepInEx');
 }
 
-async function copyFiles(source: string, dest: string) {
+export async function copyFiles(source: string, dest: string) {
     const [error, stat] = await noTryAsync(() => fs.lstat(source));
     if (error || !stat) return Promise.resolve();
     if (!stat.isDirectory()) console.log(chalk.blueBright(`Copying ${source} to ${dest}`));
@@ -27,11 +28,11 @@ async function copyFiles(source: string, dest: string) {
 }
 
 export async function installMods(): Promise<boolean> {
-    console.log(chalk.yellow('Installing mods...'));
+    console.log(chalk.yellow('Installing modfiles...'));
 
     const modsPath = getModsPath();
-    const [error, lcPath] = await noTryAsync(() => findGamePath('Lethal Company'));
-    if (error || !lcPath) {
+    let [err, lcPath] = await noTryAsync(() => findGamePath('Lethal Company'));
+    if (err || !lcPath) {
         console.log(chalk.redBright('Could not find Lethal Company installation!'));
         return false;
     }
@@ -44,16 +45,23 @@ export async function installMods(): Promise<boolean> {
         return copyFiles(source, dest);
     });
 
-    const [err] = await noTryAsync(() => Promise.all(promises));
+    [err] = await noTryAsync(() => Promise.all(promises));
     if (err) {
-        console.log(chalk.redBright('Failed to install mods!'));
+        console.log(chalk.redBright('Failed to install modfiles!'));
         console.error(err);
         return false;
     }
 
-    console.log(chalk.yellow('Installed mods!'));
+    console.log(chalk.yellow('Installed modfiles!'));
 
-    console.log(chalk.blueBright('All done!'));
+    [err] = await noTryAsync(() => installModpack(lcPath));
+    if (err) {
+        console.log(chalk.redBright('Failed to install modpack!'));
+        console.error(err);
+        return false;
+    }
+
+    console.log(chalk.yellow('All done!'));
     console.log(chalk.greenBright('Enjoy playing Lethal Company (modded)!'));
     console.log(chalk.yellow('If you want to uninstall the mods, run this app again.'));
     return true;

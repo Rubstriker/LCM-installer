@@ -1,9 +1,24 @@
 const { exec } = require('child_process');
+const archiver = require('archiver');
 const fss = require('fs');
 const fs = fss.promises;
 const path = require('path');
 const root = path.join(__dirname, '../../');
 
+function zipDirectory(sourceDir, outPath) {
+    const archive = archiver('zip', { zlib: { level: 9 }});
+    const stream = fss.createWriteStream(outPath);
+
+    return new Promise((resolve, reject) => {
+        archive
+            .directory(sourceDir, false)
+            .on('error', err => reject(err))
+            .pipe(stream);
+
+        stream.on('close', () => resolve());
+        archive.finalize();
+    });
+}
 function cmd(command, ...args) {
     let cmdPath = JSON.stringify(path.join(root, 'node_modules', command));
     cmdPath += args.map(arg => ` ${arg}`).join('');
@@ -21,27 +36,15 @@ function cmd(command, ...args) {
     });
 }
 
-async function readDirRecursive(dir) {
-    const results = await fs.readdir(dir);
-    const files = [];
-
-    for (const result of results) {
-        if (result.endsWith('.js')) files.push(result);
-        if (result.includes('.')) continue;
-
-        const subFiles = await readDirRecursive(path.join(dir, result));
-        for (const subFile of subFiles) files.push(`${result}/${subFile}`);
-    }
-
-    return files;
-}
-
 async function package() {
     console.log('Compiling TypeScript...');
     await cmd(path.join('typescript', 'bin', 'tsc'));
 
     console.log('Packaging executable...');
     await cmd(path.join('pkg', 'lib-es5', 'bin.js'), JSON.stringify(path.join(root, 'package.json')));
+
+    console.log('Packaging modpack...');
+    await zipDirectory(path.join(root, 'pack'), path.join(root, 'out', 'pack.zip'));
 }
 
 async function clean() {
