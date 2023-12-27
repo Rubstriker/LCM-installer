@@ -21,12 +21,16 @@
     "notnotnotswipez-MoreCompany-1.7.2",
     "Hexnet111-SuitSaver-1.1.2",
     "RugbugRedfern-Skinwalkers-2.0.1",
-    "taffyko-BetterSprayPaint-1.1.0"
+    "taffyko-BetterSprayPaint-1.1.0",
+    "HomelessGinger-MaskedEnemyOverhaul-2.1.0"
   ],
   "config": {
     "camera": {
       "renderDistance": 70,
       "monitorResolution": 0
+    },
+    "masked": {
+      "Use Vanilla Spawns": true
     }
   }
 }
