@@ -2,7 +2,8 @@ function patch(data) {
     const { config } = data;
     if (!config.camera) config.camera = {
         monitorResolution: 0,
-        renderDistance: 70
+        renderDistance: 70,
+        cameraFps: 30
     };
 
     let result = "[MONITOR QUALITY]\n";
