@@ -4,7 +4,7 @@ function patch(data) {
         "Use Vanilla Spawns": false
     };
 
-    let result = "[GENERAL]\n";
+    let result = "[General]\n";
     for (const key in config.masked) result += `${key} = ${config.masked[key]}\n`;
 
     return result;
