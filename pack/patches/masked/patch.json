@@ -1,0 +1,10 @@
+{
+  "name": "MaskedEnmeyRework",
+  "action": "file",
+  "operations": [
+    {
+      "source": "js:patch://patch.js",
+      "destination": "BepInEx/config/MaskedEnemyRework.cfg"
+    }
+  ]
+}
