@@ -148,7 +148,7 @@ export async function getLatestVersion(): Promise<string> {
 }
 
 const PACK_URL = 'https://github.com/firecraftgaming/LCM-installer/releases/download/{version}/pack.zip';
-async function downloadPack(file: string, url?: string) {
+export async function downloadPack(file: string, url?: string) {
     if (!url) {
         const version = await getLatestVersion();
         url = PACK_URL.replace('{version}', version);
