@@ -6,14 +6,10 @@ import {updateMods} from './update';
 
 const t = setInterval(() => {}, 1000);
 async function main() {
-    const args = process.argv.slice();
-
-    const cmd = args.shift();
-    if (cmd.endsWith('node')) args.shift(); // Should be implemented in a better way
-
+    const args = process.argv.slice(2);
     if (args.length > 0) {
         if (args[0] === 'update') {
-            await updateMods();
+            await updateMods(args);
             return;
         }
 
