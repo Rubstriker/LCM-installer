@@ -19,9 +19,11 @@
     "malco-Terminal_TP-1.0.1",
     "notnotnotswipez-MoreCompany-1.9.4",
     "Hexnet111-SuitSaver-1.2.1",
-    "RugbugRedfern-Skinwalkers-5.0.0",
     "taffyko-BetterSprayPaint-2.0.4",
-    "Monkeytype-HideChat-1.0.0"
+    "Monkeytype-HideChat-1.0.0",
+    vsanex-ItemQuickSwitch-1.1.0,
+    matsuura-HealthMetrics-1.0.2,
+    Rune580-LethalCompany_InputUtils-0.7.7
   ],
   "config": {
     "camera": {
