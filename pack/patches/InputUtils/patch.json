@@ -1,0 +1,10 @@
+{
+    "name": "InputUtils",
+    "action": "file",
+    "operations": [
+      {
+        "source": "patch://LethalCompanyInputUtils",
+        "destination": "BepInEx/plugins/LethalCompanyInputUtils"
+      }
+    ]
+  }
