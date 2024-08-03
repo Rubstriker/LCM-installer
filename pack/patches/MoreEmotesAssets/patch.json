@@ -1,0 +1,10 @@
+{
+    "name": "MoreEmotesAssets",
+    "action": "file",
+    "operations": [
+      {
+        "source": "patch://Assets",
+        "destination": "BepInEx/plugins/Assets"
+      }
+    ]
+  }
