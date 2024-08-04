@@ -30,6 +30,9 @@
       "renderDistance": 70,
       "monitorResolution": 3,
       "cameraFps": 24
+    },
+    "emotes": {
+      "I am a Party Pooper": true
     }
   }
 }
