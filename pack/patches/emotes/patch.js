@@ -1,7 +1,7 @@
 function patch(data) {
     const { config } = data;
     if (!config.emotes) config.emotes = {
-        I am a Party Pooper: false
+        "I am a Party Pooper": false
     };
 
     let result = "[Emote Settings]\n";
