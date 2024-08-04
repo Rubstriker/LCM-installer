@@ -32,7 +32,7 @@
       "cameraFps": 24
     },
     "emotes": {
-      "I am a Party Pooper = true"
+      "I am a Party Pooper": true
     }
   }
 }
