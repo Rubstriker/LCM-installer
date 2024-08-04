@@ -23,7 +23,8 @@
     "Monkeytype-HideChat-1.0.0",
     "matsuura-HealthMetrics-1.0.2",
     "Kittenji-Maxwell_ScrapItem-1.0.1",
-    "FlipMods-TooManyEmotes-2.1.25"
+    "FlipMods-TooManyEmotes-2.1.25",
+    "Coppertiel-MaskedEnemyOverhaulFork-3.3.0"
   ],
   "config": {
     "camera": {
@@ -33,6 +34,9 @@
     },
     "emotes": {
       "I am a Party Pooper": true
+    },
+    "masked": {
+      "Use Vanilla Spawns": true
     }
   }
 }
