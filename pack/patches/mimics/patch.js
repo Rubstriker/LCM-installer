@@ -1,13 +1,11 @@
 function patch(data) {
     const { config } = data;
-    if (!config.camera) config.camera = {
-        monitorResolution: 0,
-        renderDistance: 70,
-        cameraFps: 30
+    if (!config.mimics) config.mimics = {
+        "Easy Mode": false,
     };
 
-    let result = "[MONITOR QUALITY]\n";
-    for (const key in config.camera) result += `${key} = ${config.camera[key]}\n`;
+    let result = "[Difficulty]\n";
+    for (const key in config.mimics) result += `${key} = ${config.mimics[key]}\n`;
 
     return result;
 }
