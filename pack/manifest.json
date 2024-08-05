@@ -40,6 +40,9 @@
     },
     "masked": {
       "Use Vanilla Spawns": true
+    },
+    "mimics": {
+      "Easy Mode": true
     }
   }
 }
