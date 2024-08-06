@@ -4,7 +4,7 @@
   "operations": [
     {
       "source": "js:patch://patch.js",
-      "destination": "BepInEx/config/MaskedEnemyRework.cfg"
+      "destination": "BepInEx/config/Mirage.cfg"
     }
   ]
 }
