@@ -39,7 +39,7 @@
       "I am a Party Pooper": true
     },
     "masked": {
-      "Use Vanilla Spawns": true
+      "EnableOverrideSpawnChance": false
     },
     "mimics": {
       "Easy Mode": true
