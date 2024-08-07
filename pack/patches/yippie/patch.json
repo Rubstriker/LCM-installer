@@ -1,0 +1,10 @@
+{
+    "name": "Yippiemod",
+    "action": "file",
+    "operations": [
+      {
+        "source": "patch:/yippeesound",
+        "destination": "BepInEx/plugins/yippeesound"
+      }
+    ]
+  }
