@@ -3,7 +3,7 @@
     "action": "file",
     "operations": [
       {
-        "source": "patch:/yippeesound",
+        "source": "patch://yippeesound",
         "destination": "BepInEx/plugins/yippeesound"
       }
     ]
